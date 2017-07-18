@@ -14,7 +14,7 @@ class FreeProxyListsSpider(BaseProxySpider):
 
     def __init__(self):
         BaseProxySpider.__init__(self)
-        self.urls = ['http://www.freeproxylists.net/']
+        self.urls = ['http://www.freeproxylists.net/?c=&pt=&pr=&a%5B%5D=2&u=50']
         self.headers = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Encoding': 'gzip, deflate',
@@ -39,7 +39,7 @@ class FreeProxyListsSpider(BaseProxySpider):
                     ip_decode = re.findall(ip_pattern, item)[0]
                     ip_url = urllib.parse.unquote(ip_decode)
                     ip_soup = BeautifulSoup(ip_url, 'lxml')
-                    ip = ip_soup.text.encode()
+                    ip = ip_soup.text
 
                     item = '<tr class=' + item + '</tr>'
                     soup = BeautifulSoup(item, 'lxml')
@@ -48,9 +48,9 @@ class FreeProxyListsSpider(BaseProxySpider):
                     proxy = Proxy()
                     proxy.set_value(
                         ip=ip,
-                        port=tbodys[1].text.encode(),
-                        country=tbodys[4].text.encode(),
-                        anonymity=tbodys[3].text.encode(),
+                        port=tbodys[1].text,
+                        country=tbodys[4].text,
+                        anonymity=tbodys[3].text,
                         source=self.name,
                     )
                     proxy_list.append(proxy)
