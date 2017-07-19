@@ -28,7 +28,7 @@ class SixSixipSpider(BaseProxySpider):
             "anonymoustype=4&"
             "start=&ports=&export=&ipaddress=&area=0&proxytype=2&"
             "api=66ip"]
-        self.interval = 60 * 10
+        self.interval = 60 * 5
 
     def parse_page(self, response):
         proxy_list = list()

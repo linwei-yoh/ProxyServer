@@ -27,7 +27,7 @@ class XiciSpider(BaseProxySpider):
                      "http://www.xicidaili.com/nn/2",
                      "http://www.xicidaili.com/nn/3",
                      "http://www.xicidaili.com/nn/4"]
-        self.interval = 60 * 60 * 5 # 5小时
+        self.interval = 60 * 30 # 0.5小时
 
     def parse_page(self, response):
         proxy_list = list()

@@ -14,7 +14,7 @@ class BugngSpider(BaseProxySpider):
     def __init__(self, q):
         BaseProxySpider.__init__(self, q)
         self.urls = ["http://www.bugng.com/api/getproxy/json?num=80&anonymity=1&type=0"]
-        self.interval = 60  # 1分钟
+        self.interval = 60 * 5  # 5分钟
 
     def parse_page(self, response):
         proxy_list = list()
