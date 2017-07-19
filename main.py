@@ -38,7 +38,7 @@ def proxy_server():
         if proxy_count < 100:
             for src in proxy_src:
                 src.start_requests()
-            time.sleep(1)
+        time.sleep(1)
 
 
 if __name__ == '__main__':
