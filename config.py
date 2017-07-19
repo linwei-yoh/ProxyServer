@@ -25,6 +25,7 @@ DB_config = {
 }
 
 database = 'ipproxy'
+
 ipproxy_check_set = "check_set"
 free_ipproxy_table = 'free_ipproxy'
 
