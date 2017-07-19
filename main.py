@@ -26,7 +26,7 @@ def proxy_server():
         proxy_src = [BugngSpider(proxy_queue), KuaiDaiLiSpider(proxy_queue), SixSixipSpider(proxy_queue),
                      SuperfastipSpider(proxy_queue), XiciSpider(proxy_queue)]
     elif proxy_type == 1:
-        proxy_src = [FreeProxyListsSpider(proxy_queue), GatherproxySpider(proxy_queue), SixSixipSpider(proxy_queue),
+        proxy_src = [FreeProxyListsSpider(proxy_queue), GatherproxySpider(proxy_queue), BugngSpider(proxy_queue),
                      ProxyNovaSpider(proxy_queue)]
     else:
         proxy_src = [BugngSpider(proxy_queue), KuaiDaiLiSpider(proxy_queue), SixSixipSpider(proxy_queue),

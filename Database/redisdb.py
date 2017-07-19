@@ -24,7 +24,9 @@ class Redisdb(SqlBase):
         self.client.flushdb()
 
     def init_proxy_table(self, table_name):
+        self.client.delete(self.check_set)
         self.client.delete(self.table_name)
+        print("清除全部proxy记录")
 
     def insert_proxy(self, table_name, proxy:str):
         if not self.client.sismember(self.check_set, proxy):
