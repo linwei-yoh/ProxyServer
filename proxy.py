@@ -83,3 +83,6 @@ class Proxy(object):
             return '3'
         else:
             return '3'
+
+    def get_ip_port(self):
+        return "%s:%s" % (self.ip, self.port)

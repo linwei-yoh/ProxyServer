@@ -6,14 +6,14 @@ import re
 from proxy import Proxy
 from bs4 import BeautifulSoup
 from BaseProxySpider import BaseProxySpider
-import logging
+from logger_config import reportlog
 
 
 class FreeProxyListsSpider(BaseProxySpider):
     name = 'freeproxylists'
 
-    def __init__(self):
-        BaseProxySpider.__init__(self)
+    def __init__(self,q):
+        BaseProxySpider.__init__(self,q)
         self.urls = ['http://www.freeproxylists.net/?c=&pt=&pr=&a%5B%5D=2&u=50']
         self.headers = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -24,6 +24,7 @@ class FreeProxyListsSpider(BaseProxySpider):
             'Upgrade-Insecure-Requests': '1',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:50.0) Gecko/20100101 Firefox/50.0',
         }
+        self.interval = 60*5  # 5分钟
 
     def parse_page(self, response):
         proxy_list = list()
@@ -57,7 +58,8 @@ class FreeProxyListsSpider(BaseProxySpider):
 
             self.add_proxys(proxy_list)
         except Exception as e:
-            logging.error("%s 爬取出错:" % self.name + str(e))
+            reportlog.error("%s 爬取出错:" % self.name + str(e))
+
 
 if __name__ == '__main__':
     proxy_client = FreeProxyListsSpider()

@@ -7,14 +7,14 @@ from BaseProxySpider import BaseProxySpider
 
 from pyquery import PyQuery as pq
 from proxy import Proxy
-import logging
+from logger_config import reportlog
 
 
 class KuaiDaiLiSpider(BaseProxySpider):
     name = '快代理'
 
-    def __init__(self):
-        BaseProxySpider.__init__(self)
+    def __init__(self,q):
+        BaseProxySpider.__init__(self,q)
         self.headers = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Encoding': 'gzip, deflate',
@@ -50,7 +50,7 @@ class KuaiDaiLiSpider(BaseProxySpider):
                 proxy_list.append(proxy)
             self.add_proxys(proxy_list)
         except Exception as e:
-            logging.error("%s 爬取出错:" % self.name + str(e))
+            reportlog.error("%s 爬取出错:" % self.name + str(e))
 
 
 if __name__ == '__main__':

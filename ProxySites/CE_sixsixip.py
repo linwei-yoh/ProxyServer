@@ -5,14 +5,14 @@
 from BaseProxySpider import BaseProxySpider
 import re
 from proxy import Proxy
-import logging
+from logger_config import reportlog
 
 
 class SixSixipSpider(BaseProxySpider):
     name = '66ip'
 
-    def __init__(self):
-        BaseProxySpider.__init__(self)
+    def __init__(self, q):
+        BaseProxySpider.__init__(self, q)
         self.headers = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Encoding': 'gzip, deflate',
@@ -23,11 +23,12 @@ class SixSixipSpider(BaseProxySpider):
         }
         self.urls = [
             "http://www.66ip.cn/nmtq.php?"
-            "getnum=200&"
-            "isp=1&"
-            "anonymoustype=3&"
-            "start=&ports=&export=&ipaddress=&area=0&proxytype=0&"
+            "getnum=500&"
+            "isp=0&"
+            "anonymoustype=4&"
+            "start=&ports=&export=&ipaddress=&area=0&proxytype=2&"
             "api=66ip"]
+        self.interval = 60 * 10
 
     def parse_page(self, response):
         proxy_list = list()
@@ -50,7 +51,7 @@ class SixSixipSpider(BaseProxySpider):
                 proxy_list.append(proxy)
             self.add_proxys(proxy_list)
         except Exception as e:
-            logging.error("%s 爬取出错:" % self.name + str(e))
+            reportlog.error("%s 爬取出错:" % self.name + str(e))
 
 
 if __name__ == '__main__':

@@ -4,16 +4,15 @@
 
 from BaseProxySpider import BaseProxySpider
 import re
-
-import logging
 from proxy import Proxy
+from logger_config import reportlog
 
 
 class SuperfastipSpider(BaseProxySpider):
     name = 'superfast'
 
-    def __init__(self):
-        BaseProxySpider.__init__(self)
+    def __init__(self, q):
+        BaseProxySpider.__init__(self, q)
         self.headers = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Encoding': 'gzip, deflate',
@@ -25,6 +24,7 @@ class SuperfastipSpider(BaseProxySpider):
         }
         self.urls = ["http://superfastip.com/welcome/getips/1",
                      "http://superfastip.com/welcome/getips/2"]
+        self.interval = 60 * 10
 
     def parse_page(self, response):
         proxy_list = list()
@@ -47,7 +47,7 @@ class SuperfastipSpider(BaseProxySpider):
                 proxy_list.append(proxy)
             self.add_proxys(proxy_list)
         except Exception as e:
-            logging.error("%s 爬取出错:" % self.name + str(e))
+            reportlog.error("%s 爬取出错:" % self.name + str(e))
 
 
 if __name__ == '__main__':

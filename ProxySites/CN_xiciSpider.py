@@ -6,14 +6,14 @@ from BaseProxySpider import BaseProxySpider
 import re
 from proxy import Proxy
 
-import logging
+from logger_config import reportlog
 
 
 class XiciSpider(BaseProxySpider):
     name = 'xicidaili'
 
-    def __init__(self):
-        BaseProxySpider.__init__(self)
+    def __init__(self,q):
+        BaseProxySpider.__init__(self,q)
         self.headers = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Encoding': 'gzip, deflate',
@@ -27,6 +27,7 @@ class XiciSpider(BaseProxySpider):
                      "http://www.xicidaili.com/nn/2",
                      "http://www.xicidaili.com/nn/3",
                      "http://www.xicidaili.com/nn/4"]
+        self.interval = 60 * 10
 
     def parse_page(self, response):
         proxy_list = list()
@@ -49,7 +50,7 @@ class XiciSpider(BaseProxySpider):
 
             self.add_proxys(proxy_list)
         except Exception as e:
-            logging.error("%s 爬取出错:" % self.name + str(e))
+            reportlog.error("%s 爬取出错:" % self.name + str(e))
 
 
 if __name__ == '__main__':

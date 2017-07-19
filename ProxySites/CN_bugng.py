@@ -3,18 +3,18 @@
 # __author__ = 'AL'
 
 from BaseProxySpider import BaseProxySpider
-import logging
 import json
 from proxy import Proxy
+from logger_config import reportlog
 
 
 class BugngSpider(BaseProxySpider):
     name = '虫代理'
 
-    def __init__(self):
-        BaseProxySpider.__init__(self)
+    def __init__(self,q):
+        BaseProxySpider.__init__(self,q)
         self.urls = ["http://www.bugng.com/api/getproxy/json?num=80&anonymity=1&type=0"]
-        self.interval = 30  # 0.5分钟
+        self.interval = 60  # 1分钟
 
     def parse_page(self, response):
         proxy_list = list()
@@ -35,7 +35,7 @@ class BugngSpider(BaseProxySpider):
                 proxy_list.append(proxy)
             self.add_proxys(proxy_list)
         except Exception as e:
-            logging.error("%s 爬取出错:" % self.name + str(e))
+            reportlog.error("%s 爬取出错:" % self.name + str(e))
 
 
 if __name__ == '__main__':

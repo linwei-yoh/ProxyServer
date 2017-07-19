@@ -4,26 +4,25 @@
 import requests
 from datetime import datetime
 import time
-
 from concurrent.futures import ThreadPoolExecutor
 import utilities
 
+from logger_config import ip_log
 
-# def make_dir(dir):
-#     if not os.path.exists(dir):
-#         os.makedirs(dir)
+
 
 
 class BaseProxySpider(object):
     name = 'basespider'
 
-    def __init__(self):
+    def __init__(self, proxy_queue):
         self.urls = []
-        # self.dir_log = 'log/proxy/%s' % self.name
+
         self.headers = {}
         self.start = True
         self.last_time = datetime.now()
         self.interval = 60 * 10  # 10分钟
+        self.proxy_queue = proxy_queue
 
     def start_requests(self):
         if self.interval is None:
@@ -67,5 +66,8 @@ class BaseProxySpider(object):
         pass
 
     def add_proxys(self, proxys):
-        print(len(proxys))
+        ip_log.debug("get %d proxy from %s" % (len(proxys), self.name))
+
+        for proxy in proxys:
+            self.proxy_queue.put_nowait(proxy)
         pass

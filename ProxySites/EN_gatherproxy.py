@@ -3,21 +3,18 @@
 import json
 import re
 
-
 from BaseProxySpider import BaseProxySpider
 from proxy import Proxy
-import logging
+from logger_config import reportlog
 
 
 class GatherproxySpider(BaseProxySpider):
     name = 'gatherproxy'
 
-    def __init__(self):
-        BaseProxySpider.__init__(self)
+    def __init__(self, q):
+        BaseProxySpider.__init__(self, q)
         self.urls = [
-            'http://gatherproxy.com/',
-            'http://www.gatherproxy.com/proxylist/anonymity/?t=Anonymous',
-            'http://gatherproxy.com/proxylist/country/?c=China',
+            'http://www.gatherproxy.com/proxylist/anonymity/?t=Anonymous'
         ]
 
         self.headers = {
@@ -29,6 +26,7 @@ class GatherproxySpider(BaseProxySpider):
             'Upgrade-Insecure-Requests': '1',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:52.0) Gecko/20100101 Firefox/52.0'
         }
+        self.interval = 60 * 5  # 5分钟
 
     def parse_page(self, response):
         proxy_list = list()
@@ -52,11 +50,10 @@ class GatherproxySpider(BaseProxySpider):
                 proxy_list.append(proxy)
             self.add_proxys(proxy_list)
         except Exception as e:
-            logging.error("%s 爬取出错:" % self.name + str(e))
+            reportlog.error("%s 爬取出错:" % self.name + str(e))
 
 
 if __name__ == '__main__':
     proxy_client = GatherproxySpider()
     proxy_client.start_requests()
     pass
-
