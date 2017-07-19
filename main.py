@@ -3,7 +3,7 @@
 # __author__ = 'AL'
 
 from ProxySites import BugngSpider, KuaiDaiLiSpider, SixSixipSpider, SuperfastipSpider, XiciSpider
-from ProxySites import FreeProxyListsSpider, GatherproxySpider
+from ProxySites import FreeProxyListsSpider, GatherproxySpider, ProxyNovaSpider
 from validator import Validator
 from redisdb import Redisdb
 import queue
@@ -26,10 +26,11 @@ def proxy_server():
         proxy_src = [BugngSpider(proxy_queue), KuaiDaiLiSpider(proxy_queue), SixSixipSpider(proxy_queue),
                      SuperfastipSpider(proxy_queue), XiciSpider(proxy_queue)]
     elif proxy_type == 1:
-        proxy_src = [FreeProxyListsSpider(proxy_queue), GatherproxySpider(proxy_queue), SixSixipSpider(proxy_queue)]
+        proxy_src = [FreeProxyListsSpider(proxy_queue), GatherproxySpider(proxy_queue), SixSixipSpider(proxy_queue),
+                     ProxyNovaSpider(proxy_queue)]
     else:
         proxy_src = [BugngSpider(proxy_queue), KuaiDaiLiSpider(proxy_queue), SixSixipSpider(proxy_queue),
-                     SuperfastipSpider(proxy_queue), XiciSpider(proxy_queue),
+                     SuperfastipSpider(proxy_queue), XiciSpider(proxy_queue),ProxyNovaSpider(proxy_queue),
                      FreeProxyListsSpider(proxy_queue), GatherproxySpider(proxy_queue), SixSixipSpider(proxy_queue)]
 
     while True:
@@ -38,7 +39,6 @@ def proxy_server():
             for src in proxy_src:
                 src.start_requests()
             time.sleep(1)
-
 
 
 if __name__ == '__main__':

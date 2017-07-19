@@ -8,5 +8,5 @@ from CN_superfastip import SuperfastipSpider
 
 from EN_freeproxylists import FreeProxyListsSpider
 from EN_gatherproxy import GatherproxySpider
-
+from En_ProxyNova import ProxyNovaSpider
 from EN_usproxy import UsProxySpider
