@@ -43,4 +43,5 @@ class Redisdb(SqlBase):
 
 if __name__ == '__main__':
     redis = Redisdb()
+    redis.init_proxy_pool("")
     pass
