@@ -9,7 +9,7 @@ from redisdb import Redisdb
 import queue
 import time
 
-target_url = "http://house.ksou.cn/"
+target_url = "https://www.realestateview.com.au/"  # 必须是完整路径包含 http://等
 proxy_type = 0  # 0:'CN' 1:'EN'2:'ALL'
 
 
