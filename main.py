@@ -9,7 +9,7 @@ from redisdb import Redisdb
 import queue
 import time
 
-target_url = "https://www.realestateview.com.au/"  # 必须是完整路径包含 http://等
+target_url = "https://www.realestate.com.au"  # 必须是完整路径包含 http://等
 proxy_type = 0  # 0:'CN' 1:'EN'2:'ALL'
 
 
@@ -17,7 +17,7 @@ def proxy_server():
     proxy_queue = queue.Queue()
 
     redic_client = Redisdb()
-    redic_client.init_database("")
+    redic_client.init_proxy_table("")
 
     validator = Validator(target_url, redic_client, proxy_queue)
     validator.start()
@@ -30,7 +30,7 @@ def proxy_server():
                      ProxyNovaSpider(proxy_queue)]
     else:
         proxy_src = [BugngSpider(proxy_queue), KuaiDaiLiSpider(proxy_queue), SixSixipSpider(proxy_queue),
-                     SuperfastipSpider(proxy_queue), XiciSpider(proxy_queue),ProxyNovaSpider(proxy_queue),
+                     SuperfastipSpider(proxy_queue), XiciSpider(proxy_queue), ProxyNovaSpider(proxy_queue),
                      FreeProxyListsSpider(proxy_queue), GatherproxySpider(proxy_queue), SixSixipSpider(proxy_queue)]
 
     while True:

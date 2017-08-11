@@ -20,10 +20,6 @@ class Redisdb(SqlBase):
         self.client = redis.StrictRedis(connection_pool=pool)
         print("redis 链接完成")
 
-    def init_proxy_pool(self, database_name):
-        self.client.delete(self.table_name)
-        self.client.delete(self.check_set)
-
     def init_proxy_table(self, table_name):
         self.client.delete(self.check_set)
         self.client.delete(self.table_name)
@@ -43,5 +39,5 @@ class Redisdb(SqlBase):
 
 if __name__ == '__main__':
     redis = Redisdb()
-    redis.init_proxy_pool("")
+    redis.init_proxy_table("")
     pass

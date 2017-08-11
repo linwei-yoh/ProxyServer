@@ -61,7 +61,7 @@ def allot_logger(name, filename, level=None, fmt=None):
 allot_logger('ProxyLog', '.\Report\Report.log', level=logging.ERROR)
 reportlog = logging.getLogger('ProxyLog')
 
-allot_logger_just_show('ProxyIP',level=logging.DEBUG)
+allot_logger_just_show('ProxyIP', level=logging.DEBUG)
 ip_log = logging.getLogger('ProxyIP')
 
 if __name__ == '__main__':

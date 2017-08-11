@@ -44,7 +44,7 @@ class Validator(Thread):
                 self.recoder[proxy.source] = 1
             else:
                 self.recoder[proxy.source] += 1
-            ip_log.debug(self.recoder)
+            ip_log.warning(self.recoder)
             self.client.insert_proxy("", proxy_ip)
 
 
