@@ -35,7 +35,7 @@ class Validator(Thread):
                 "https": "http://%s" % proxy_ip,
             }
             header = {'User-Agent': make_random_useragent()}
-            r = requests.get(self.target_url, headers=header, proxies=proxies, timeout=(6.05, 10))
+            r = requests.get(self.target_url, headers=header, proxies=proxies, timeout=(9.05, 20))
         except Exception as e:
             return None
 

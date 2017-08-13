@@ -28,7 +28,7 @@ class Redisdb(SqlBase):
     def insert_proxy(self, table_name, proxy:str):
         if not self.client.sismember(self.check_set, proxy):
             self.client.sadd(self.check_set, proxy)
-            self.client.rpush(self.table_name, proxy)
+            self.client.lpush(self.table_name, proxy)
 
     def update_proxy(self, table_name, proxy):
         self.client.rpush(self.table_name, proxy)
