@@ -11,7 +11,7 @@ from logger_config import reportlog
 class SixSixipSpider(BaseProxySpider):
     name = '66ip'
 
-    def __init__(self, q):
+    def __init__(self, q, proxy_type="All"):
         BaseProxySpider.__init__(self, q)
         self.headers = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -21,14 +21,15 @@ class SixSixipSpider(BaseProxySpider):
             'Host': 'www.66ip.cn',
             'Upgrade-Insecure-Requests': '1',
         }
+        proxy_param = {"All": 2, "Http": 0, "Https": 1}
         self.urls = [
             "http://www.66ip.cn/nmtq.php?"
             "getnum=500&"
             "isp=0&"
             "anonymoustype=4&"
-            "start=&ports=&export=&ipaddress=&area=0&proxytype=2&"
-            "api=66ip"]
-        self.interval = 60 * 5
+            "start=&ports=&export=&ipaddress=&area=0&proxytype=%s&"
+            "api=66ip" % proxy_param[proxy_type]]
+        self.interval = 60 * 10
 
     def parse_page(self, response):
         proxy_list = list()

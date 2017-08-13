@@ -10,7 +10,8 @@ import queue
 import time
 
 target_url = "https://www.realestate.com.au"  # 必须是完整路径包含 http://等
-proxy_type = 0  # 0:'CN' 1:'EN'2:'ALL'
+Src_type = 0  # 0:'CN' 1:'EN'2:'ALL'
+Proxy_type = "All"  # "All", "Http", "Https"
 
 
 def proxy_server():
@@ -22,14 +23,16 @@ def proxy_server():
     validator = Validator(target_url, redic_client, proxy_queue)
     validator.start()
 
-    if proxy_type == 0:
-        proxy_src = [BugngSpider(proxy_queue), KuaiDaiLiSpider(proxy_queue), SixSixipSpider(proxy_queue),
+    if Src_type == 0:
+        proxy_src = [BugngSpider(proxy_queue, Proxy_type), KuaiDaiLiSpider(proxy_queue),
+                     SixSixipSpider(proxy_queue, Proxy_type),
                      SuperfastipSpider(proxy_queue), XiciSpider(proxy_queue)]
-    elif proxy_type == 1:
+    elif Src_type == 1:
         proxy_src = [FreeProxyListsSpider(proxy_queue), GatherproxySpider(proxy_queue), BugngSpider(proxy_queue),
                      ProxyNovaSpider(proxy_queue)]
     else:
-        proxy_src = [BugngSpider(proxy_queue), KuaiDaiLiSpider(proxy_queue), SixSixipSpider(proxy_queue),
+        proxy_src = [BugngSpider(proxy_queue, Proxy_type), KuaiDaiLiSpider(proxy_queue),
+                     SixSixipSpider(proxy_queue, Proxy_type),
                      SuperfastipSpider(proxy_queue), XiciSpider(proxy_queue), ProxyNovaSpider(proxy_queue),
                      FreeProxyListsSpider(proxy_queue), GatherproxySpider(proxy_queue), SixSixipSpider(proxy_queue)]
 

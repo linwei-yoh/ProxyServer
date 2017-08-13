@@ -11,9 +11,10 @@ from logger_config import reportlog
 class BugngSpider(BaseProxySpider):
     name = '虫代理'
 
-    def __init__(self, q):
+    def __init__(self, q, proxy_type="All"):
         BaseProxySpider.__init__(self, q)
-        self.urls = ["http://www.bugng.com/api/getproxy/json?num=80&anonymity=1&type=0"]
+        proxy_param = {"All": 0, "Http": 1, "Https": 2}
+        self.urls = ["http://www.bugng.com/api/getproxy/json?num=80&anonymity=1&type=%s" % proxy_param[proxy_type]]
         self.interval = 60 * 5  # 5分钟
 
     def parse_page(self, response):
