@@ -11,7 +11,7 @@ import time
 
 target_url = "https://www.realestate.com.au"  # 必须是完整路径包含 http://等
 Src_type = 0  # 0:'CN' 1:'EN'2:'ALL'
-Proxy_type = "All"  # "All", "Http", "Https"
+Proxy_type = "Https"  # "All", "Http", "Https"
 
 
 def proxy_server():
@@ -38,7 +38,7 @@ def proxy_server():
 
     while True:
         proxy_count = redic_client.get_proxy_count("")
-        if proxy_count < 100:
+        if proxy_count < 300:
             for src in proxy_src:
                 src.start_requests()
         time.sleep(1)
